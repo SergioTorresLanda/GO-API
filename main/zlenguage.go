@@ -7,7 +7,7 @@
 package main 
 import "fmt"
 
-func main(){
+func main2(){
 	const pi = 3.1415 //Can't be changed
 	var name = "Sergio \nTorres"
 	var name2 = `Sergio 
@@ -22,7 +22,8 @@ Landa` //using back quotes to format.
     //use types accordingly to manage memory
 	var floatNum float64 = 5.654 //float32
 	var myBool = true
-
+	// &&  and 
+	// ||  or 
 	//multiple var init
 	var var1, var2 int = 1, 2
 	var3, var4 := 3, 4
