@@ -70,7 +70,7 @@ func mainx(){
 	
 }
 
-func main(){
+func mainy(){
 	var n int = 1000000
 	var testSlice = []int{}
 	var testSliceFast = make([]int, 0, n) //>3x times faster
