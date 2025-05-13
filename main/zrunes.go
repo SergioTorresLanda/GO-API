@@ -3,7 +3,7 @@ import ("fmt"
 "strings")
 
 
-func main(){
+func main3(){
 	//STRINGS (UTF-8 Encoding) 8bytes
 	var myString = "résumé"
 	var indexed = myString[0] //indexing the underlying byte array !!!
