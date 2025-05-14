@@ -28,6 +28,7 @@ func mainx(){
 
 	//SLICES:
 	//Wrappers around arrays
+	//Contain pointers to an underlying array .. cpiying pointers (like a class in swift)
 	var intSlice []int32 = []int32{1,2,3} 
 	intSlice = append(intSlice, 4)
 	fmt.Println(intSlice) //[1,2,3,4] //[1,2,3,4,*,*]

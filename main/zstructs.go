@@ -24,7 +24,7 @@ type owner struct{
 	name string
 }
 
-func main(){
+func mainS(){
 	var myEngine gasEngine = gasEngine{mpg: 25, gallons: 5} //possible
 	var myeEngine eEngine = eEngine{25, 5} //possible
 	var myEngine2 gasEngine2 = gasEngine2{26, 7, owner{"alfrd"} , 5}
