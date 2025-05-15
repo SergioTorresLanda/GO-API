@@ -3,24 +3,24 @@ import (
 	"fmt"
 )
 //STRUCTS
-type gasEngine struct{
+type gasEngine struct {
 	mpg uint8
 	gallons uint8
 }
 
-type eEngine struct{
+type eEngine struct {
 	mpkwh uint8
 	kwh uint8
 }
 
-type gasEngine2 struct{
+type gasEngine2 struct {
 	mpg uint8
 	gallons uint8
 	//ownerInfo owner 
 	owner //can define abstract types!
 	int //can define abstract built-in types!
 }
-type owner struct{
+type owner struct { 
 	name string
 }
 

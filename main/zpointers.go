@@ -3,7 +3,7 @@ import (
 	"fmt"
 )
 
-func main(){
+func mainZ(){
 //POINTERS (variables that stores memory location)
 
 var p *int32 //nil

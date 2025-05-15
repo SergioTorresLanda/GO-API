@@ -29,7 +29,7 @@ Landa` //using back quotes to format.
 	var3, var4 := 3, 4
 
 	fmt.Println(n3)
-	fmt.Println(n1/n2) //return integer roounded down.
+	fmt.Println(n1/n2) //returns integer roounded down.
 	fmt.Println(n1%n2) //return remainder = 1
 	fmt.Println(pi)
 	fmt.Println(name)
