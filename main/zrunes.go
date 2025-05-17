@@ -1,6 +1,8 @@
 package main 
-import ("fmt"
-"strings")
+import (
+	"fmt"
+	"strings"
+)
 
 
 func main3(){
@@ -31,8 +33,5 @@ func main3(){
 	}
 	var myRune2 = 'r'
 	fmt.Println(myRune2) //114
-
-
-
 
 }

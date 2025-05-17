@@ -4,9 +4,6 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
-	//"math/rand"
-	//"time"
-	//"sync"
 )
 
 //CHANNELS
@@ -40,7 +37,7 @@ func process(c chan int){
 var MAX_CHICKEN_PRICE float32 = 5
 var MAX_TOFU_PRICE float32 = 3
 
-func main(){
+func mainChan2(){
 	var chickenChannel = make(chan string)
 	var tofuChannel = make(chan string)
 	var websites = []string{"walmart.com", "costco.com", "wholefoods.com"}

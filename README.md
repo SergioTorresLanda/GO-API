@@ -12,3 +12,10 @@ Contents:
 8. zchannels: Channels
 9. zgenerics: Generics
 10. zAPI: Building an API
+
+TODO:
+Build an API: https://www.youtube.com/watch?v=8uiZC0l4Ajw&t=2480s
+Go Deeper into Context Package: https://www.youtube.com/watch?v=BkzgYfygDy8
+Implement MiddleWare: https://www.youtube.com/watch?v=ALbAYpNC6s8
+
+Project layout & structure : https://github.com/golang-standards/project-layout/tree/master
