@@ -12,11 +12,10 @@ var wg = sync.WaitGroup{} //atomic counter
 //var m = sync.Mutex{} //mutual exclusion (m.lock , m.unlock)
 var mPro = sync.RWMutex{} //mutual exclusion (m.lock , m.unlock, & m.Rlock , m.Runlock)
 
-
 var dbData = []string{"id1", "id2", "id3", "id4", "id5"}
 var results = []string{}
 
-func main(){
+func mainCoroutines(){
 
 	t0:=time.Now()
 	for i:=0; i<len(dbData); i++{
@@ -28,7 +27,6 @@ func main(){
 	wg.Wait()
 	fmt.Printf("\nTotal execution time: %v", time.Since(t0)) //6 seconds with no concurrency,
 	fmt.Printf("\nResults: %v", results) //6 seconds with no concurrency,
-
 }
 
 func dbCall(i int){
