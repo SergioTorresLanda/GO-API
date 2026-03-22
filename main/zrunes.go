@@ -5,7 +5,7 @@ import (
 )
 
 
-func main3(){
+func mainR(){
 	//STRINGS (UTF-8 Encoding) 8bytes
 	var myString = "résumé"
 	var indexed = myString[0] //indexing the underlying byte array !!!

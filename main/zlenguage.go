@@ -7,7 +7,7 @@
 package main 
 import "fmt"
 
-func main1(){
+func mainL(){
 	const pi = 3.1415 //Can't be changed
 	var name = "Sergio \nTorres"
 	var name2 = `Sergio 

@@ -15,7 +15,7 @@ var mPro = sync.RWMutex{} //mutual exclusion (m.lock , m.unlock, & m.Rlock , m.R
 var dbData = []string{"id1", "id2", "id3", "id4", "id5"}
 var results = []string{}
 
-func mainCoroutines(){
+func mainGoroutines(){
 
 	t0:=time.Now()
 	for i:=0; i<len(dbData); i++{

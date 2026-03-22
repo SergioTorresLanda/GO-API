@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-func main2(){
+func mainF(){
 	name := "Sergio"
 	printMe(name)
 

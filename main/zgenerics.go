@@ -10,7 +10,7 @@ import (
 //GENERICS
 //COLAPSE DIFERENT METHODS THAT DO THE SAME THING FOR DIFFERENT TYPES !!!
 
-func main(){
+func mainG(){
 	intSlice := []int{1,2,3}
 	fmt.Println(sumSlice(intSlice)) //type infered ! [int]
 	float32Slice := []float32{2,4,6,1}

@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func mainx(){
+func mainDS(){
 
 	//ARRAY: 
 	//fixed lenght [3]
