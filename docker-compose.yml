@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # 1. The PostgreSQL Database Container
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: graphene_admin
+      POSTGRES_PASSWORD: supersecretpassword
+      POSTGRES_DB: graphene_trading
+    ports:
+      - "5432:5432" # Maps your Mac's port 5432 to the database
+    volumes:
+      # This ensures your trade data survives even if the container is destroyed
+      - pg_data:/var/lib/postgresql/data 
+
+  # 2. Your Go API Container
+  api:
+    build: . # Tells Docker to use the Dockerfile we just made
+    ports:
+      - "8080:8080"
+    environment:
+      # This is the exact connection string Go will use to talk to Postgres!
+      - DATABASE_URL=postgres://graphene_admin:supersecretpassword@db:5432/graphene_trading?sslmode=disable
+    depends_on:
+      - db # Forces Docker to start the database BEFORE starting the Go server
+
+volumes:
+  pg_data: # Declares the persistent storage volume
