@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 	"time"
-
+    "strconv"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"gorm.io/driver/postgres"
@@ -61,10 +61,20 @@ func initDB() {
 		dsn = "host=localhost user=graphene_admin password=supersecretpassword dbname=graphene_trading port=5432 sslmode=disable"
 	}
 
-	var err error
-	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	var err error	
+	// Try to connect up to 5 times, waiting 2 seconds between each try
+	for i := 1; i <= 5; i++ {
+		db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+		if err == nil {
+			break // Connection successful, break out of the loop!
+		}
+		
+		log.Printf("Database not ready yet, retrying in 2 seconds... (Attempt %d/5)", i)
+		time.Sleep(2 * time.Second)
+	}
+
 	if err != nil {
-		log.Fatal("Failed to connect to database: ", err)
+		log.Fatal("Failed to connect to database after 5 attempts: ", err)
 	}
 
 	db.AutoMigrate(&Trade{})
@@ -106,7 +116,23 @@ func handleConnections(c *gin.Context) {
 
 func getTrades(c *gin.Context) {
 	var trades []Trade
-	db.Find(&trades)
+	query := db
+	// 1. Check if the mobile app sent a "?since=" timestamp
+	sinceQuery := c.Query("since")
+	
+	if sinceQuery != "" {
+		// Convert the string timestamp to a Go integer
+		sinceInt, err := strconv.ParseInt(sinceQuery, 10, 64)
+		if err == nil {
+			// Convert Unix milliseconds back to a Go time.Time object
+			sinceTime := time.UnixMilli(sinceInt)
+			// Tell Postgres to ONLY fetch trades newer than this time
+			query = query.Where("timestamp > ?", sinceTime)
+		}
+	}
+	// 2. Fetch the trades in chronological order (oldest to newest) so the mobile app replays them perfectly
+	query.Order("timestamp asc").Find(&trades)
+
 	c.IndentedJSON(http.StatusOK, trades)
 }
 
