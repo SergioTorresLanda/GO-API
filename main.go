@@ -92,6 +92,11 @@ func main() {
 	// --- NEW WEBSOCKET ROUTE ---
 	router.GET("/ws", handleConnections)
 
+	// --- KUBERNETES / GITLAB HEALTH CHECK ---
+	router.GET("/health", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"status": "Graphene Engine Online"})
+	})
+
 	v1 := router.Group("/api/v1")
 	{
 		v1.GET("/trades", getTrades)
@@ -117,22 +122,20 @@ func handleConnections(c *gin.Context) {
 func getTrades(c *gin.Context) {
 	var trades []Trade
 	query := db
-	// 1. Check if the mobile app sent a "?since=" timestamp
-	sinceQuery := c.Query("since")
-	
-	if sinceQuery != "" {
-		// Convert the string timestamp to a Go integer
-		sinceInt, err := strconv.ParseInt(sinceQuery, 10, 64)
+	// 1. Look for the last known ID from the mobile app
+	lastIdQuery := c.Query("last_id")
+
+	if lastIdQuery != "" {
+		// Convert the string ID to an integer
+		lastIdInt, err := strconv.Atoi(lastIdQuery)
 		if err == nil {
-			// Convert Unix milliseconds back to a Go time.Time object
-			sinceTime := time.UnixMilli(sinceInt)
-			// Tell Postgres to ONLY fetch trades newer than this time
-			query = query.Where("timestamp > ?", sinceTime)
+			// Tell Postgres to strictly fetch newer IDs
+			query = query.Where("id > ?", lastIdInt)
 		}
 	}
-	// 2. Fetch the trades in chronological order (oldest to newest) so the mobile app replays them perfectly
-	query.Order("timestamp asc").Find(&trades)
-
+	// 2. Fetch the trades in chronological order
+	query.Order("id asc").Find(&trades)
+	
 	c.IndentedJSON(http.StatusOK, trades)
 }
 

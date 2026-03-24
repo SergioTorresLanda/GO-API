@@ -1,0 +1,27 @@
+# 1. Define the stages of our pipeline
+stages:
+  - test
+  - build
+
+# 2. Define the exact Docker image we want the Runner to use
+image: golang:1.21-alpine
+
+# 3. The Testing Job
+test_graphene_api:
+  stage: test
+  script:
+    - echo "Initializing Graphene Test Protocol..."
+    - cd GO-API
+    # Download dependencies
+    - go mod tidy 
+    # Run all files ending in _test.go with verbose logging
+    - go test -v ./... 
+
+# 4. The Build Job (Only runs if the tests pass!)
+build_graphene_api:
+  stage: build
+  script:
+    - echo "Tests passed. Compiling Go binary..."
+    - cd GO-API
+    - go build -o graphene_server main.go
+    - echo "Build successful. Engine ready for deployment."
