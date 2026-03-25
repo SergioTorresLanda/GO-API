@@ -25,3 +25,13 @@ build_graphene_api:
     - cd GO-API
     - go build -o graphene_server main.go
     - echo "Build successful. Engine ready for deployment."
+
+    # --- REACT NATIVE MOBILE JOBS ---
+test_graphene_mobile:
+  stage: test
+  image: node:18-alpine # Use Node.js for the React Native environment
+  script:
+    - echo "Initializing Mobile UI Tests..."
+    - cd MOBILE-APP # Change this to your actual React Native folder name
+    - yarn install
+    - yarn test --passWithNoTests # Runs Jest in the CI environment
