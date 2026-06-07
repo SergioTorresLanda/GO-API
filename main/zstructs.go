@@ -76,7 +76,7 @@ func (e eEngine) milesLeft() uint8 { //defined method for the struct eEngine
 	return e.mpkwh*e.kwh
 }
 //INTERFACEE !!!
-type engine interface{ //like swift protocol !!! :)
+type engine interface { //like swift protocol !!! :)
 	milesLeft() uint8
 }
 
